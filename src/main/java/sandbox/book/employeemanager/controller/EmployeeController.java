@@ -39,8 +39,9 @@ public class EmployeeController {
     @PostMapping
     public ResponseEntity<?> createEmployee(@Valid @RequestBody AddEmployeeDto addEmployeeDto){
         try{
-            employeeService.createEmployee(addEmployeeDto);
-            return ResponseEntity.ok().body("Successfully created an employee");
+            Employee employee = employeeService.createEmployee(addEmployeeDto);
+            addEmployeeDto.setId(employee.getId());
+            return ResponseEntity.ok().body(addEmployeeDto);
         } catch (Exception e){
             log.error("Unexpected error", e);
             return ResponseEntity.internalServerError().body("There was an internal server error while processing your request.");

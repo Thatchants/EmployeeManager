@@ -26,7 +26,7 @@ public class EmployeeService {
     }
 
     @Transactional
-    public void createEmployee(AddEmployeeDto addEmployeeDto) {
+    public Employee createEmployee(AddEmployeeDto addEmployeeDto) {
         Employee newEmployee = Employee.builder()
                 .firstName(addEmployeeDto.getFirstName())
                 .lastName(addEmployeeDto.getLastName())
@@ -34,7 +34,7 @@ public class EmployeeService {
                 .creationDate(LocalDate.now())
                 .build();
 
-        employeeRepository.save(newEmployee);
+        return employeeRepository.save(newEmployee);
     }
 
     @Transactional
